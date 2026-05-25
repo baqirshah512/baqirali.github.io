@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Baqir Ali — Network Engineer</title>
+  <style>
+    /* ── Reset & Base ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:   #0d1b2a;
+      --navy2:  #162032;
+      --navy3:  #1e2f47;
+      --blue:   #2d7dd2;
+      --blue2:  #3a8fe8;
+      --cyan:   #48cae4;
+      --white:  #f0f4f8;
+      --grey:   #8da0b3;
+      --card:   #17263a;
+      --border: #253548;
+      --tag-bg: #1a3050;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      line-height: 1.65;
+    }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Nav ───────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13,27,42,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 60px;
+    }
+    .nav-logo { font-weight: 700; font-size: 1.05rem; color: var(--white); letter-spacing: .03em; }
+    .nav-logo span { color: var(--cyan); }
+    .nav-links { display: flex; gap: 1.8rem; }
+    .nav-links a { color: var(--grey); font-size: .9rem; transition: color .2s; }
+    .nav-links a:hover { color: var(--cyan); text-decoration: none; }
+
+    /* ── Sections ──────────────────────────────────────────── */
+    section { padding: 5rem 1.5rem; max-width: 900px; margin: 0 auto; }
+
+    /* ── Hero ──────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: flex-start;
+      max-width: 900px; margin: 0 auto;
+      padding: 7rem 1.5rem 3rem;
+    }
+    .hero-eyebrow {
+      font-size: .9rem; color: var(--cyan); letter-spacing: .12em;
+      text-transform: uppercase; margin-bottom: .75rem;
+    }
+    .hero-name {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800; line-height: 1.1;
+      background: linear-gradient(135deg, var(--white) 40%, var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-title {
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      color: var(--grey); margin-top: .5rem; font-weight: 400;
+    }
+    .hero-desc {
+      max-width: 580px; margin-top: 1.4rem;
+      color: #a0b4c8; font-size: 1.02rem; line-height: 1.7;
+    }
+    .hero-certs {
+      display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.4rem;
+    }
+    .cert-badge {
+      background: var(--tag-bg); border: 1px solid var(--blue);
+      color: var(--blue2); border-radius: 4px;
+      padding: .25rem .7rem; font-size: .78rem; font-weight: 600;
+    }
+    .hero-btns { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: .65rem 1.5rem;
+      border-radius: 6px; font-size: .95rem; font-weight: 600;
+      transition: all .2s; cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--blue); color: #fff;
+      border: 2px solid var(--blue);
+    }
+    .btn-primary:hover { background: var(--blue2); text-decoration: none; }
+    .btn-outline {
+      background: transparent; color: var(--cyan);
+      border: 2px solid var(--cyan);
+    }
+    .btn-outline:hover { background: rgba(72,202,228,.08); text-decoration: none; }
+
+    /* ── Section headings ──────────────────────────────────── */
+    .section-label {
+      font-size: .8rem; color: var(--cyan); letter-spacing: .14em;
+      text-transform: uppercase; margin-bottom: .4rem;
+    }
+    .section-title {
+      font-size: 1.9rem; font-weight: 700; margin-bottom: .4rem;
+    }
+    .section-line {
+      width: 48px; height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      border-radius: 2px; margin-bottom: 2.5rem;
+    }
+
+    /* ── About ─────────────────────────────────────────────── */
+    #about p { color: #a0b4c8; margin-bottom: 1rem; font-size: 1.02rem; }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem; margin-top: 2rem;
+    }
+    .about-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.2rem 1.4rem;
+    }
+    .about-card h4 { color: var(--cyan); font-size: .85rem; margin-bottom: .4rem; letter-spacing: .06em; text-transform: uppercase; }
+    .about-card p { color: var(--white); font-size: .95rem; margin: 0; }
+
+    /* ── Skills ────────────────────────────────────────────── */
+    #skills { background: var(--navy2); border-radius: 0; }
+    .skill-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1.2rem; }
+    .skill-group {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.4rem;
+    }
+    .skill-group h4 {
+      font-size: .82rem; color: var(--cyan); text-transform: uppercase;
+      letter-spacing: .1em; margin-bottom: 1rem; padding-bottom: .5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: .45rem; }
+    .tag {
+      background: var(--tag-bg); color: #a8c0d8;
+      border: 1px solid var(--border);
+      border-radius: 4px; padding: .2rem .6rem; font-size: .8rem;
+    }
+
+    /* ── Projects ──────────────────────────────────────────── */
+    .projects-grid { display: flex; flex-direction: column; gap: 1.4rem; }
+    .project-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.6rem 1.8rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .project-card:hover { border-color: var(--blue); transform: translateY(-2px); }
+    .project-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: .5rem; }
+    .project-title { font-size: 1.1rem; font-weight: 700; color: var(--white); }
+    .project-label {
+      font-size: .72rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .1em; color: var(--cyan);
+      background: rgba(72,202,228,.1); border: 1px solid rgba(72,202,228,.3);
+      border-radius: 20px; padding: .2rem .7rem;
+    }
+    .project-desc { color: #8da8be; font-size: .96rem; margin: .8rem 0; line-height: 1.65; }
+    .project-bullets { padding-left: 1.2rem; margin: .6rem 0 1rem; color: #8da8be; font-size: .94rem; }
+    .project-bullets li { margin-bottom: .35rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .8rem; }
+    .project-tag {
+      background: var(--tag-bg); color: var(--blue2);
+      border: 1px solid rgba(45,125,210,.3);
+      border-radius: 4px; padding: .15rem .55rem; font-size: .76rem; font-weight: 600;
+    }
+
+    /* ── Experience timeline ────────────────────────────────── */
+    .timeline { position: relative; padding-left: 1.8rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 6px; bottom: 6px;
+      width: 2px; background: var(--border);
+    }
+    .timeline-item { position: relative; margin-bottom: 2.4rem; }
+    .timeline-dot {
+      position: absolute; left: -1.94rem; top: 6px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--blue); border: 2px solid var(--navy);
+    }
+    .timeline-role { font-size: 1.05rem; font-weight: 700; }
+    .timeline-company { color: var(--cyan); font-size: .95rem; }
+    .timeline-date { color: var(--grey); font-size: .85rem; margin: .2rem 0 .6rem; }
+    .timeline-desc { color: #8da8be; font-size: .93rem; }
+
+    /* ── Contact ────────────────────────────────────────────── */
+    #contact { text-align: center; }
+    #contact .section-line { margin: 0 auto 2rem; }
+    .contact-desc { color: #8da8be; font-size: 1rem; margin-bottom: 2rem; }
+    .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: .5rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: .75rem 1.4rem;
+      color: var(--white); font-size: .95rem; font-weight: 500;
+      transition: border-color .2s, background .2s;
+    }
+    .contact-link:hover { border-color: var(--cyan); background: var(--navy3); text-decoration: none; }
+    .contact-link svg { width: 18px; height: 18px; fill: var(--cyan); flex-shrink: 0; }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    footer {
+      text-align: center; padding: 1.5rem;
+      color: var(--grey); font-size: .83rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Baqir <span>Ali</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <p class="hero-eyebrow">Network Engineer · Hamilton, Ontario, Canada</p>
+  <h1 class="hero-name">Baqir Ali</h1>
+  <p class="hero-title">Network Design Engineer &amp; Cloud Infrastructure Specialist</p>
+  <p class="hero-desc">
+    8+ years designing, deploying, and troubleshooting enterprise and carrier-grade network infrastructure.
+    Specializing in BGP, OSPF, SDN, OpenStack, vBRAS, CGNAT, and Linux networking — with hands-on experience
+    most engineers only read about.
+  </p>
+  <div class="hero-certs">
+    <span class="cert-badge">CCNA</span>
+    <span class="cert-badge">CompTIA Network+</span>
+    <span class="cert-badge">LFCA</span>
+    <span class="cert-badge">Azure AZ-900</span>
+  </div>
+  <div class="hero-btns">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="mailto:baqirshah2012@gmail.com" class="btn btn-outline">Get in Touch</a>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">About Me</p>
+  <h2 class="section-title">Who I Am</h2>
+  <div class="section-line"></div>
+  <p>
+    I'm a network engineer with a decade of experience spanning enterprise LAN/WAN administration,
+    ISP-grade infrastructure, and cloud platform engineering. My work sits at the intersection of
+    deep networking knowledge and practical automation — I don't just configure networks, I build
+    the tooling around them.
+  </p>
+  <p>
+    My most recent role at Insurity involved three complex, first-principles projects: porting Open vSwitch
+    onto custom Marvell silicon, deploying OpenStack-on-OpenStack for production cloud workloads, and
+    architecting a complete virtual Broadband Remote Access Server (vBRAS) for a live ISP environment —
+    including FreeRADIUS AAA, high-availability clustering, DPI, and CI/CD automation.
+  </p>
+  <p>
+    I recently completed a fast-track Networking diploma at Centennial College in Toronto and I'm
+    actively seeking full-time networking and cloud infrastructure roles in Canada.
+  </p>
+  <div class="about-grid">
+    <div class="about-card">
+      <h4>Location</h4>
+      <p>Hamilton, Ontario, Canada<br><span style="color:var(--grey);font-size:.88rem">Open to hybrid &amp; remote</span></p>
+    </div>
+    <div class="about-card">
+      <h4>Education</h4>
+      <p>Computer Systems Technology – Networking<br><span style="color:var(--grey);font-size:.88rem">Centennial College, Toronto · 2025</span></p>
+    </div>
+    <div class="about-card">
+      <h4>Experience</h4>
+      <p>8+ Years<br><span style="color:var(--grey);font-size:.88rem">Enterprise · ISP · Cloud</span></p>
+    </div>
+    <div class="about-card">
+      <h4>Status</h4>
+      <p style="color:#4ade80">Open to Work<br><span style="color:var(--grey);font-size:.88rem">Full-time · Canada</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Technical Skills</p>
+  <h2 class="section-title">What I Work With</h2>
+  <div class="section-line"></div>
+  <div class="skill-groups">
+    <div class="skill-group">
+      <h4>Routing &amp; Protocols</h4>
+      <div class="tags">
+        <span class="tag">BGP</span><span class="tag">OSPF</span><span class="tag">IS-IS</span>
+        <span class="tag">STP</span><span class="tag">LACP</span><span class="tag">MLAG</span>
+        <span class="tag">ECMP</span><span class="tag">VXLAN</span><span class="tag">Spine-Leaf</span>
+        <span class="tag">TCP/IP</span><span class="tag">NAT / CGNAT</span><span class="tag">RADIUS</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>SDN &amp; Virtualization</h4>
+      <div class="tags">
+        <span class="tag">SDN</span><span class="tag">OpenFlow</span><span class="tag">OVS (DPDK)</span>
+        <span class="tag">OpenStack</span><span class="tag">TripleO</span><span class="tag">VMware</span>
+        <span class="tag">VirtualBox</span><span class="tag">KVM</span><span class="tag">SR-IOV</span>
+        <span class="tag">NUMA</span><span class="tag">VPP</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>Linux &amp; Systems</h4>
+      <div class="tags">
+        <span class="tag">Linux Networking</span><span class="tag">Ubuntu</span><span class="tag">CentOS</span>
+        <span class="tag">Bash</span><span class="tag">SSH / SSL</span><span class="tag">Netconf</span>
+        <span class="tag">nDPI</span><span class="tag">FreeRADIUS</span><span class="tag">HAProxy</span>
+        <span class="tag">ELK Stack</span><span class="tag">SNMP</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>Automation &amp; DevOps</h4>
+      <div class="tags">
+        <span class="tag">Ansible</span><span class="tag">Jenkins</span><span class="tag">CI/CD</span>
+        <span class="tag">Python</span><span class="tag">Bash scripting</span><span class="tag">Git</span>
+        <span class="tag">REST APIs</span><span class="tag">Wireshark</span><span class="tag">tcpdump</span>
+        <span class="tag">Mininet</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>Cloud &amp; Monitoring</h4>
+      <div class="tags">
+        <span class="tag">Microsoft Azure</span><span class="tag">AZ-900</span>
+        <span class="tag">ELK Stack</span><span class="tag">Galera Cluster</span>
+        <span class="tag">MySQL</span><span class="tag">AD DS</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>Hardware &amp; Infrastructure</h4>
+      <div class="tags">
+        <span class="tag">Cisco Routing &amp; Switching</span><span class="tag">Fiber Optic</span>
+        <span class="tag">Server Racking</span><span class="tag">Cabling</span>
+        <span class="tag">Hardware Support</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">Projects</p>
+  <h2 class="section-title">Key Technical Projects</h2>
+  <div class="section-line"></div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-title">Virtual Broadband Remote Access Server (vBRAS)</span>
+        <span class="project-label">ISP Production</span>
+      </div>
+      <p class="project-desc">
+        Architected and deployed a full-stack vBRAS for a live ISP environment, handling subscriber
+        authentication, dynamic routing, high-availability, traffic inspection, and monitoring.
+      </p>
+      <ul class="project-bullets">
+        <li>Deployed Accel-PPP and Quagga with multi-protocol routing (BGP, OSPF, IS-IS)</li>
+        <li>Built HA layer with Galera Cluster (MySQL) and HAProxy load balancing</li>
+        <li>Implemented DPI with nDPI; validated NAT64 with Tayga</li>
+        <li>Configured FreeRADIUS with MySQL for AAA; PPPoE, VLAN, and NTP testing</li>
+        <li>Deployed ELK Stack + SNMP telemetry for end-to-end monitoring</li>
+        <li>Built Jenkins CI/CD pipeline; performance-tested CGNAT with VPP</li>
+      </ul>
+      <div class="project-tags">
+        <span class="project-tag">vBRAS</span><span class="project-tag">BGP</span>
+        <span class="project-tag">OSPF</span><span class="project-tag">CGNAT</span>
+        <span class="project-tag">FreeRADIUS</span><span class="project-tag">HAProxy</span>
+        <span class="project-tag">ELK Stack</span><span class="project-tag">Jenkins</span>
+        <span class="project-tag">VPP</span><span class="project-tag">nDPI</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-title">OpenStack on OpenStack (TripleO) Deployment</span>
+        <span class="project-label">Cloud Infrastructure</span>
+      </div>
+      <p class="project-desc">
+        Deployed a production-grade OpenStack-on-OpenStack (TripleO) environment on bare-metal servers,
+        optimized for high-performance, latency-sensitive cloud workloads.
+      </p>
+      <ul class="project-bullets">
+        <li>Deployed overcloud/undercloud with SR-IOV, NUMA topology awareness, and CPU pinning</li>
+        <li>Configured HugePages and Scale-IO for memory and storage performance</li>
+        <li>Ensured scalability and reliability for multi-tenant cloud environments</li>
+      </ul>
+      <div class="project-tags">
+        <span class="project-tag">OpenStack</span><span class="project-tag">TripleO</span>
+        <span class="project-tag">SR-IOV</span><span class="project-tag">NUMA</span>
+        <span class="project-tag">KVM</span><span class="project-tag">Linux</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-title">Open vSwitch (OVS) Porting on Marvell Board</span>
+        <span class="project-label">SDN / Hardware</span>
+      </div>
+      <p class="project-desc">
+        Ported Open vSwitch onto custom Marvell hardware, building a full automated testing framework
+        to validate network integrity and SDN controller integration.
+      </p>
+      <ul class="project-bullets">
+        <li>Designed and automated Python/Bash test suites for OVS and OpenFlow on Marvell silicon</li>
+        <li>Integrated OpenDayLight and POX SDN controllers for comprehensive protocol coverage</li>
+        <li>Used Mininet and Miniedit for realistic network simulation; validated with Wireshark and Ostinato</li>
+        <li>Implemented rule deployment via hardware-specific APIs</li>
+      </ul>
+      <div class="project-tags">
+        <span class="project-tag">OVS</span><span class="project-tag">SDN</span>
+        <span class="project-tag">OpenFlow</span><span class="project-tag">OpenDayLight</span>
+        <span class="project-tag">Python</span><span class="project-tag">Mininet</span>
+        <span class="project-tag">Wireshark</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">Work History</p>
+  <h2 class="section-title">Experience</h2>
+  <div class="section-line"></div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-role">Network Design Engineer</div>
+      <div class="timeline-company">Insurity</div>
+      <div class="timeline-date">June 2021 – August 2024</div>
+      <div class="timeline-desc">
+        Led delivery of three large-scale R&amp;D and production network projects covering SDN, cloud
+        infrastructure, and ISP-grade access systems. Built automation, CI/CD pipelines, and monitoring
+        infrastructure end-to-end.
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-role">Network Support Engineer</div>
+      <div class="timeline-company">Marvellous Technologies</div>
+      <div class="timeline-date">December 2018 – April 2021</div>
+      <div class="timeline-desc">
+        Delivered Tier-2 support across Cisco-based enterprise infrastructure. Managed fiber optic
+        network lifecycle, conducted security audits, and documented configurations and runbooks.
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-role">Network Administrator</div>
+      <div class="timeline-company">XflowResearch.Inc</div>
+      <div class="timeline-date">November 2016 – November 2018</div>
+      <div class="timeline-desc">
+        Administered LAN/WAN and mainframe networks, led disaster recovery operations, mentored
+        junior admins, and authored shell scripts to automate routine network tasks.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Get In Touch</p>
+  <h2 class="section-title">Contact Me</h2>
+  <div class="section-line"></div>
+  <p class="contact-desc">
+    I'm actively looking for full-time networking and cloud infrastructure roles in Canada.<br>
+    Feel free to reach out — I respond quickly.
+  </p>
+  <div class="contact-links">
+    <a href="mailto:baqirshah2012@gmail.com" class="contact-link">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+      </svg>
+      baqirshah2012@gmail.com
+    </a>
+    <a href="https://www.linkedin.com/in/baqirali" target="_blank" class="contact-link">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+      LinkedIn
+    </a>
+    <a href="tel:+16478245045" class="contact-link">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+      </svg>
+      +1 647 824 5045
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Baqir Ali · Network Engineer · Hamilton, Ontario, Canada</p>
+</footer>
+
+</body>
+</html>
